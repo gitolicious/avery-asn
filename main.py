@@ -1,3 +1,6 @@
+import os
+import sys
+
 import AveryLabels
 from reportlab.lib.units import mm, cm
 from reportlab_qrcode import QRCodeImage
@@ -96,10 +99,15 @@ def render(c: canvas.Canvas, width: float, height: float):
             c.restoreState()
 
 
-fileName = "out/labels-" + str(labelForm) + "-" + str(mode) + ".pdf"
+outputDirectory = 'out'
+fileName = os.path.join(outputDirectory, f"labels-{labelForm}-{mode}.pdf")
 
 label = AveryLabels.AveryLabel(labelForm)
 label.debug = debug
+try:
+    os.makedirs(outputDirectory, exist_ok=True)
+except OSError as oe:
+    sys.exit(f"Failed to create directory '{outputDirectory}': {oe}")
 label.open(fileName)
 label.render(render, count=labelsToPrint, offset=offsetLabels)
 label.close()
