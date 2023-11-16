@@ -2,7 +2,7 @@ import os
 import sys
 
 import AveryLabels
-from reportlab.lib.units import mm, cm
+from reportlab.lib.units import mm
 from reportlab_qrcode import QRCodeImage
 from reportlab.pdfgen import canvas
 

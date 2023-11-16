@@ -1,10 +1,7 @@
-import os
 from collections.abc import Iterator
 from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4, landscape
-from reportlab.lib.units import inch, mm, cm
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import mm, cm
 
 # Usage:
 #   label = AveryLabels.AveryLabel(5160)
