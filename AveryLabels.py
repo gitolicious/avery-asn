@@ -25,6 +25,9 @@ from reportlab.pdfbase.ttfonts import TTFont
 # page size w/h or name from reportlab.lib.pagesizes
 
 labelInfo = {
+    # 22x 32mm x 10mm mini labels
+    3044: ( 2, 11, (32, 10), (2,2), (1, 1), (66.5*mm, 120.5*mm)),
+
     # 2.6 x 1 address labels
     5160: ( 3, 10, (187,  72), (11, 0), (14, 36), A4),
     5161: ( 2, 10, (288,  72), (0, 0), (18, 36), A4),
