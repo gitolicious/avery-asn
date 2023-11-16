@@ -62,9 +62,9 @@ class AveryLabel:
         self.canvas.setLineCap(1)
 
     def topLeft(self, x=None, y=None):
-        if x == None:
+        if x is None:
             x = self.position
-        if y == None:
+        if y is None:
             if self.topDown:
                 x,y = divmod(x, self.down)
             else:
