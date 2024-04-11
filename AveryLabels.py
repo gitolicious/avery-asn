@@ -130,3 +130,4 @@ class AveryLabel:
             func( canv, self.size[0], self.size[1], chunk )
             canv.restoreState()
             self.advance()
+            
