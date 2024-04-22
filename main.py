@@ -11,14 +11,14 @@ labelForm = 4778
 
 # mode "qr" prints a QR code and an ASN (archive serial number) text
 mode = "qr"
-subLabelsX = 2
-subLabelsY = 2
 
 # mode text prints a free text
 #mode = "text"
 #text="6y"
-#subLabelsX = 5
-#subLabelsY = 3
+
+# print multiple labels on a single cutout of a label sheet
+subLabelsX = 2
+subLabelsY = 2
 
 # what was the first ASN number printed on this sheet
 firstASNOnSheet = 42
