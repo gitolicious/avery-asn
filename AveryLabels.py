@@ -2,6 +2,7 @@ from collections.abc import Iterator
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4, letter
 from reportlab.lib.units import mm, cm, inch
+from math import atan, degrees
 
 # Usage:
 #   label = AveryLabels.AveryLabel(5160)
@@ -55,6 +56,7 @@ class AveryLabel:
         self.down = data[1]
         self.size = data[2]
         self.labelsep = self.size[0]+data[3][0], self.size[1]+data[3][1]
+        self.labelsTotalWidth = data[0] * data[2][0] + (data[0]-1) * data[3][0]
         self.margins = data[4]
         self.topDown = True
         self.debug = False
@@ -95,6 +97,9 @@ class AveryLabel:
         self.canvas.save()
         self.canvas = None
 
+    def calculateRotationDegrees(self, rotateOffset):
+        return degrees(atan(rotateOffset/self.labelsTotalWidth))
+
     # To render, you can either create a template and tell me
     # "go draw N of these templates" or provide a callback.
     # Callback receives canvas, width, height.
@@ -102,12 +107,13 @@ class AveryLabel:
     # Or, pass a callable and an iterator.  We'll do one label
     # per iteration of the iterator.
 
-    def render( self, thing, count, offset=0, *args ):
+    def render( self, thing, count, offset=0, rotateOffset=0, *args ):
         assert callable(thing) or isinstance(thing, str)
         if isinstance(count, Iterator):
             return self.render_iterator( thing, count )
 
         canv = self.canvas
+        canv.rotate(self.calculateRotationDegrees(rotateOffset))
         for i in range(offset+count):
             if i >= offset:
                 canv.saveState()

@@ -28,6 +28,8 @@ labelsAlreadyPrinted = 20
 labelsCorrupted = 4
 # how many labels should be printed now
 labelsToPrint = 18
+# set this to 3 if the top left corner of your labels is in the correct position but your top right corner is 3 mm too far down
+rotateOffset = -1*mm
 
 fontSize = 2*mm
 qrSize = 0.9
@@ -109,7 +111,7 @@ try:
 except OSError as oe:
     sys.exit(f"Failed to create directory '{outputDirectory}': {oe}")
 label.open(fileName)
-label.render(render, count=labelsToPrint, offset=offsetLabels)
+label.render(render, count=labelsToPrint, offset=offsetLabels, rotateOffset=rotateOffset)
 label.close()
 
 print
