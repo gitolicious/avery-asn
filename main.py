@@ -20,6 +20,9 @@ mode = "qr"
 subLabelsX = 2
 subLabelsY = 2
 
+# prefix for the ASNs (make sure to also update your paperless config if you change this value)
+prefix = 'ASN'
+includePrefixInLabel = True
 # what was the first ASN number printed on this sheet
 firstASNOnSheet = 42
 # how many labels have already been printed on this sheet successfully
@@ -65,14 +68,15 @@ def render(c: canvas.Canvas, width: float, height: float):
             c.translate(subX, subY)
 
             if mode == "qr":
-                barcode_value = f"ASN{currentASN:05d}"
+                barcode_value = f"{prefix}{currentASN:05d}"
+                label_value = f"{prefix if includePrefixInLabel else ''}{currentASN:05d}"
                 currentASN = currentASN + 1
 
                 qr = QRCodeImage(barcode_value, size=subLabelHeight*qrSize)
                 qr.drawOn(c, x=qrMargin, y=subLabelHeight*((1-qrSize)/2))
                 c.setFont("Helvetica", size=fontSize)
                 c.drawString(x=subLabelHeight, y=(
-                    subLabelHeight-fontSize)/2, text=barcode_value)
+                    subLabelHeight-fontSize)/2, text=label_value)
 
             elif mode == "text":
                 if debug:
